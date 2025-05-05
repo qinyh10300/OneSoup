@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from soups import get_soup_by_id, get_all_soups
-from SiliconFlow import SiliconFlow
+from silicon_flow import SiliconFlow
 
 app = Flask(__name__, static_folder='static')
 CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})  # Adjust for Vite's default port
