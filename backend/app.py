@@ -23,7 +23,7 @@ def generate_prompt(soup_q, soup_a, question):
 @app.route('/api/soups', methods=['GET'])
 def get_soups():
     soups = get_all_soups()
-    return jsonify([{"id": s["id"], "title": s["title"]} for s in soups])
+    return jsonify([{"id": s["id"], "title": s["title"], "description": s["soup_q"]} for s in soups])
 
 @app.route('/api/soup/<int:soup_id>', methods=['GET'])
 def get_soup(soup_id):

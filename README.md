@@ -62,3 +62,4 @@ turtle_soup_project/
 - The frontend uses Vite and Vue 3 with Vue Router.
 - Static files (images, audio) are served from the backend.
 - The `SiliconFlow` library is assumed to be available for the backend LLM calls.
+
