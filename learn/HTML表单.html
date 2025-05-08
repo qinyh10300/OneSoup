@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HTML 表单</title>
 </head>
 <body>
     
+    <form action="">
+        <!-- <span>用户名：</span>
+        <input type="text" placeholder="请输入用户名" required><br>
+        <span>密码：</span>
+        <input type="text" value="请输入用户名"><br> -->
+        <label for="usrname">用户名：</label>
+        <input type="text" id="usrname" placeholder="请输入用户名" required><br>
+        <label for="pwd">密码：</label>
+        <input type="password" id="pwd" placeholder="请输入密码"><br>
+        
+        <label for="">性别：</label>
+        <input type="radio" name="gender"> 男
+        <input type="radio" name="gender"> 女
+        <input type="radio" name="gender"> 其他
+
+        <br>
+        
+        <label for="">性别：</label>
+        <input type="radio"> 男
+        <input type="radio"> 女
+        <input type="radio"> 其他
+
+        <br>
+        
+        <label for="">爱好：</label>
+        <input type="checkbox" name="hobby"> 唱歌
+        <input type="checkbox" name="hobby"> 喝水
+        <input type="checkbox" name="hobby"> 傀儡足球
+
+        <br>
+
+        <input type="submit" value="上传">
+
+    </form>
+
+    <!-- action 后面跟着的是表单上传到的服务器后端api-->
+    <form action="#"></form>
+
 </body>
 </html>
