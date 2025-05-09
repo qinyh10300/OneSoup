@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 基本语法</title>
+</head>
+<body>
+    <script>
+        var x;
+        let y = 5;    // 更安全灵活的变量声明方式
+        const PI = 3.14;
+        console.log(x, y, PI); // undefined 5 3.14
+        let name = '如火'
+        console.log(name);
+        let empty_name = null; // null 是一个对象类型的值，表示空值
+        console.log(empty_name); // null
+        
+        // let age = 18
+        // if (age > 18) {
+        //     console.log("成年人")
+        // } else if (age == 18) {
+        //     console.log("刚成年")
+        // } else {
+        //     console.log("未成年人")
+        // }
+
+        // let time = 22
+        // if (time < 12) {
+        //     alert("早上好")
+        // } else if (time < 18) {
+        //     alert("下午好")
+        // } else {
+        //     alert("晚上好")
+        // }
+
+        console.log("For循环");
+        for (let i=0; i<10;i++){
+            if (i==2){
+                continue;
+            }
+            if (i==5){
+                break;
+            }
+            console.log(i);
+        }
+
+        console.log("While循环");
+        let cnt = 1;
+        while (cnt<=10){
+            console.log(cnt);
+            cnt++;
+        }
+    </script>
+</body>
+</html>
