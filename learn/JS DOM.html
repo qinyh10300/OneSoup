@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript DOM</title>
+</head>
+<body>
+    <div id="box1">这是一个ID选择器标签</div>
+    <div class="box2">这是一个类选择器标签</div>
+    <div>这是一个普通的div标签</div>
+    
+    <a href="#">跳转链接</a>
+
+    <br>
+
+    <button>点击按钮</button>
+
+    <script>
+        var element_id = document.getElementById('box1');
+        console.log(element_id); // 通过ID选择器获取元素
+        
+        var element_class = document.getElementsByClassName('box2')[0];
+        console.log(element_class); // 通过ID选择器获取元素
+
+        var element_tag = document.getElementsByTagName('div')[2];
+        console.log(element_tag); // 通过ID选择器获取元素
+
+        element_id.innerHTML = '这是一个ID选择器标签的内容'; // 修改元素的内容
+        element_id.innerHTML = '<a href="#">跳转链接</a>'; // 修改元素的内容
+        element_class.innerText = '这是一个类选择器标签的内容'; // 修改元素的内容
+        element_class.innerText = '<a href="#">跳转链接</a>'; // 修改元素的内容
+
+        element_tag.style.color = 'red'; // 修改元素的样式
+        element_tag.style.fontSize = '20px'; // 修改元素的样式
+
+        //DOM 属性绑定事件
+
+        var button_element = document.getElementsByTagName('button')[0]; // 获取按钮元素
+
+        button_element.onclick = function() {  // 匿名函数
+            alert('通过DOM属性触发按键');
+        }
+
+        button_element.addEventListener('click', function() { // 事件绑定
+            alert('通过addEventListener触发按键');
+        });
+
+        function showAlert() {
+            alert('通过函数触发按键');
+        }
+        button_element.addEventListener('click', showAlert); // 事件绑定
+    </script>
+</body>
+</html>
