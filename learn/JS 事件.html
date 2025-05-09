@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 函数</title>
+</head>
+<body>
+    <script>
+        function hello(){
+            console.log("Hello World!");
+            
+        }
+
+        hello();
+
+        function hello_with_return(){
+            return "Hello World!";
+        }
+
+        let result = hello_with_return();
+        console.log(result); // Hello World!
+        console.log(hello_with_return()); // Hello World!
+        
+        function hello_with_params(name){
+            console.log("Hello " + name + "!");
+        }
+
+        hello_with_params("如火"); // Hello 如火!
+        hello_with_params("小白"); // Hello 小白!
+
+        // 作用域
+
+        let global_var = "全局变量"; // 全局变量
+        function local_var_function() {
+            let local_var = "局部变量"; // 局部变量
+            console.log("局部打印全局变量" + global_var); // 可以访问全局变量
+            console.log("局部打印局部变量" + local_var); // 可以访问局部变量
+        }
+
+        local_var_function(); // 输出：全局变量 局部变量
+
+        console.log("全局打印全局变量" + global_var); // 可以访问全局变量
+        console.log("全局打印局部变量" + local_var); // 不可以访问局部变量
+    </script>
+</body>
+</html>
