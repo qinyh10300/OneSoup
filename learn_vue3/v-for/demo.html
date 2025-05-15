@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .textcolor {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- :value -->
+        <h3>value="google.com"</h3>
+        <input type="text" value="google.com"><br>
+
+        <!-- v-bind动态属性绑定 -->
+        <h3>v-bind:value="web.url"</h3>
+        <input type="text" v-bind:value="web.url"><br>
+
+        <!-- 简写形式 -->
+        <h3>:value="web.url"</h3>
+        <input type="text" :value="web.url"><br>
+
+        <!-- :src -->
+        <h3>src="windows.jpg"</h3>
+        <img src="windows.jpg" alt="秦一骅的图片">
+
+        <!-- :src -->
+        <h3>:src="web.img"</h3>
+        <img :src="web.img" alt="秦一骅的图片">
+
+        <!-- :class -->
+        <h3>class="textcolor"</h3>
+        <b class="textcolor">秦一骅狗叫</b>
+
+        <h3>:class="{textcolor:web.fontStates}</h3>
+        <b :class="{textcolor:web.fontStates}">秦一骅狗叫</b>
+    </div>
+
+    <script type="module">
+        import { createApp, reactive } from './vue.esm-browser.js'
+
+        createApp({
+            // setup选项 用于设置响应式数据和方法等等
+            setup(){
+                const web = reactive({
+                    url: "baidu.com",
+                    img: "windows.jpg",
+                    fontStates: false,
+                })
+
+                return {
+                    web,
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>
