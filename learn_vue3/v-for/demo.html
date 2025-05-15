@@ -4,40 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        .textcolor {
-            color: blue;
-        }
-    </style>
 </head>
 <body>
     <div id="app">
-        <!-- :value -->
-        <h3>value="google.com"</h3>
-        <input type="text" value="google.com"><br>
+        <!-- 无序号列表 -->
+        <ul>  
+            <li v-for="value in data.number">
+                {{value}}
+            </li>
+        </ul>
 
-        <!-- v-bind动态属性绑定 -->
-        <h3>v-bind:value="web.url"</h3>
-        <input type="text" v-bind:value="web.url"><br>
+        <ul>  
+            <li v-for="(value, index) in data.number">
+                index => {{index}} : value => {{value}}
+            </li>
+        </ul>
 
-        <!-- 简写形式 -->
-        <h3>:value="web.url"</h3>
-        <input type="text" :value="web.url"><br>
+        <ul>  
+            <li v-for="(value, key) in data.user">
+                key => {{key}} : value => {{value}}
+            </li>
+        </ul>
 
-        <!-- :src -->
-        <h3>src="windows.jpg"</h3>
-        <img src="windows.jpg" alt="秦一骅的图片">
+        <ul>  
+            <li v-for="(value, key, index) in data.user">
+                index => {{index}} : key => {{key}} : value => {{value}}
+            </li>
+        </ul>
 
-        <!-- :src -->
-        <h3>:src="web.img"</h3>
-        <img :src="web.img" alt="秦一骅的图片">
+        <ul>  
+            <!-- template可以用于包装多行标签或者代码，而且不会在页面中渲染 -->
+            <template v-for="(value, key, index) in data.user">
+                <li v-if="index==1">
+                    index => {{index}} : key => {{key}} : value => {{value}}
+                </li>
+            </template>
+        </ul>
 
-        <!-- :class -->
-        <h3>class="textcolor"</h3>
-        <b class="textcolor">秦一骅狗叫</b>
-
-        <h3>:class="{textcolor:web.fontStates}</h3>
-        <b :class="{textcolor:web.fontStates}">秦一骅狗叫</b>
+        <!-- 对象属性{}定义的，可以使用 . 来访问参数 -->
+        <ul>  
+            <li v-for="(value, index) in data.teacher" :title="value.name" :key="value.id">
+                index => {{index}} : value.id => {{value.id}} : value.name => {{value.name}} : value.web => {{value.url}}
+            </li>
+        </ul>
     </div>
 
     <script type="module">
@@ -46,14 +55,20 @@
         createApp({
             // setup选项 用于设置响应式数据和方法等等
             setup(){
-                const web = reactive({
-                    url: "baidu.com",
-                    img: "windows.jpg",
-                    fontStates: false,
+                const data = reactive({
+                    number: ['十', '十一', '十二'],  //数组
+                    user: { //对象
+                        name: '秦一骅',
+                        gender: '男',
+                    },
+                    teacher: [  //包含两个对象的数组
+                        {id: 100, name: "张三", url: "https://www.baidu.com"},
+                        {id: 101, name: "李四", url: "google.com"},
+                    ]
                 })
 
                 return {
-                    web,
+                    data,
                 }
             }
         }).mount('#app')
