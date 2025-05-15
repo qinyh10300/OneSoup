@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <!-- 插值表达式 -->
+        <h2>{{web.title}}</h2>
+        <h2>{{web.url}}</h2>
+        <h2>{{web.usr}}</h2>
+         
+        <button v-on:click="edit">修改</button><br>
+        <button @click="edit">修改-简写形式</button><hr>
+
+        回车 <input type="text" @keyup.enter="add(40, 60)"><br>
+        空格 <input type="text" @keyup.space="add(20, 30)"><br>
+        Tab <input type="text" @keydown.tab="add(10, 20)"><br>
+        w <input type="text" @keyup.w="add(5, 10)"><br>
+
+        <!-- 快捷键组合 -->
+        Ctrl + Enter <input type="text" @keyup.ctrl.enter="add(5, 10)"><br>
+        Ctrl + A <input type="text" @keyup.ctrl.a="add(5, 10)"><br>
+    </div>
+
+    <script type="module">
+        import { createApp, reactive, ref } from './vue.esm-browser.js'
+
+        createApp({
+            // setup选项 用于设置响应式数据和方法等等
+            setup(){
+                const web = reactive({
+                    title: "OneSoup",
+                    url: "google.com",
+                    usr: 0
+                })
+
+                const edit = () => {
+                    web.url = "baidu.com"
+                }
+
+                const add = (a, b) => {
+                    web.usr += a + b
+                }
+
+                return {
+                    msg: "success",
+                    web,
+                    edit,
+                    add
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>
