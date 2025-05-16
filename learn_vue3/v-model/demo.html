@@ -7,54 +7,17 @@
 </head>
 <body>
     <div id="app">
-        <h3>文本框 {{ data.text }}</h3>
-        <h3>单选框 {{ data.radio }}</h3>
-        <h3>复选框 {{ data.checkbox }}</h3>
-        <h3>记住密码 {{ data.remember }}</h3>
-        <h3>下拉框 {{ data.select }}</h3>
+        <h3>url: {{web.url}}</h3>
+        <h3>user: {{web.user}}</h3>
 
-        <!-- 单向数据绑定，当数据发生改变时，视图会自动更新，但用户手动更改 input 的值，数据不会自动更新 -->
-        单向数据绑定 <input type="text" :value="data.text">
-        
-        <hr>
-        <!-- 
-        双向数据绑定 当数据发生改变时, 视图会自动更新. 当用户手动更改 input 的值, 数据也会自动更新
-        对于 <input type="text">, v-model 绑定的是 input 元素的 value 属性
-        -->
-        双向数据绑定 <input type="text" v-model="data.text"><br>
+        实时渲染<input type="text" v-model="web.url"><br>
 
-        <hr>
-        <!--
-        单选框
-        对于 <input type="radio">, v-model 绑定的是 input 元素的选中状态 
-        -->
-        <input type="radio" v-model="data.radio" value="1"> 写作
-        <input type="radio" v-model="data.radio" value="2"> 画画
+        在失去焦点或按下回车键之后进行渲染<input type="text" v-model.lazy="web.url"><br>
 
-        <hr>
-        <!--
-        复选框
-        对于 <input type="checkbox">, v-model 绑定的是 input 元素的选中状态 
-        -->
-        <input type="checkbox" v-model="data.checkbox" value="a"> 写作
-        <input type="checkbox" v-model="data.checkbox" value="b"> 画画
-        <input type="checkbox" v-model="data.checkbox" value="c"> 运动
+        <!-- 输入100人, web.user的值仍未100 -->
+        输入框的值转换为数字类型<input type="text" v-model.number="web.user"><br>
 
-        <hr>
-        <!--记住密码-->
-        <input type="checkbox" v-model="data.remember"> 记住密码
-
-        <hr>
-        <!--
-        下拉框
-        对于 <select> 元素, v-model 绑定的是 select 元素的选中状态
-        -->
-        <select v-model="data.select">
-            <option value="">请选择</option>
-            <option value="A">写作</option>
-            <option value="B">画画</option>
-            <option value="C">运动</option>
-        </select>
+        去除首尾空格<input type="text" v-model.trim="web.url"><br>
     </div>
 
     <script type="module">
@@ -62,16 +25,13 @@
 
         createApp({
             setup(){
-                const data = reactive({
-                    text: "google.com",  // 文本框
-                    radio: "",  // 单选框
-                    checkbox: [],  // 复选框
-                    remember: false,  // 单个复选框-记住密码
-                    select: "",  // 下拉框
+                const web = reactive({
+                    url: "google.com",
+                    user: 10
                 })
 
                 return {
-                    data,
+                    web,
                 }
             }
         }).mount('#app')
