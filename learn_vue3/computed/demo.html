@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h3>add: {{add()}}</h3>
+        <h3>add: {{add()}}</h3>
+        
+        <!-- sum是属性而不是方法 -->
+        <h3>sum: {{sum}}</h3>
+        <h3>sum: {{sum}}</h3>
+
+        <!-- 如果不适用.number属性，v-model获取的是数值而不是字符串 -->
+        x <input type="text" v-model.number="data.x"><br>
+        y <input type="text" v-model.number="data.y">
+    </div>
+
+    <script type="module">
+        import { createApp, reactive, computed } from './vue.esm-browser.js'
+
+        createApp({
+            setup(){
+                const data = reactive({
+                    x: 10,
+                    y: 20,
+                })
+
+                const add = () => {
+                    console.log('add')
+                    return data.x + data.y
+                }
+
+                // 有缓存，提高性能
+                const sum = computed(() => {
+                    console.log('sum')
+                    return data.x - data.y
+                })
+
+                return {
+                    data,
+                    add,
+                    sum,
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>
