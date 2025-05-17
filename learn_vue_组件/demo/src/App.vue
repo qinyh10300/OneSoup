@@ -1,23 +1,20 @@
 <script setup>
-import { onMounted, onUpdated, ref } from 'vue'
+import { reactive, toRefs, toRef } from 'vue'
 
-onMounted(() => {
-    console.log("onMounted");
+let web = reactive({
+    name: "秦一骅",
+    url: "qinyh10300.github.io"
 })
 
-onUpdated(() => {
-    console.log("onUpdated");
-})
+// let {name, url} = toRefs(web)
 
-const user = ref(0)
-console.log(user.value);
+let url = toRef(web, "url")
 
+console.log(url);
 </script>
 
 <template>
-    {{ user }}
-
-    <button @click="user++">添加用户</button>
+    {{ url }}
 </template>
 
 <style scoped>
