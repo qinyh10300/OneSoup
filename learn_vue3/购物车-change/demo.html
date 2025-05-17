@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 600px;
+            color: #8f8e8e;
+            text-align: center;
+            border-collapse: collapse;
+        }
+
+        table thead {
+            background: #F5F5F5;
+        }
+
+        table tr {
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #ececec;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <table>
+            <thead>
+                <tr>
+                    <!-- change事件，在元素值发生改变时触发的事件 -->
+                    <!-- 如果是click，则在点击时触发事件，这时候实际上data.selected还没有更改 -->
+                    <td><input type="checkbox" v-model="data.selected" @change="selectAll"/></td>
+                    <td>商品</td>
+                    <td>单价</td>
+                    <td>库存</td>
+                    <td colspan="2">操作</td>
+                    <!-- 表示该单元格占两列宽度 -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(value, index) in data.list">
+                    <!-- 在checkbox种同时使用v-bind绑定和v-model绑定时，选中复选框时候，会将value添加到v-model数组中，否则移除 -->
+                    <td><input type="checkbox" :value="value" v-model="data.checkboxList" @change="checkSelect"/></td>
+                    <td>{{value.name}}</td>
+                    <td>{{value.price}}</td>
+                    <td>{{value.stock}}</td>
+                    <td>
+                        <button @click="sub(value)">-</button>
+                        {{value.number}}
+                        <button @click="add(value)">+</button>
+                    </td>
+                    <td><button @click="del(index, value.id)">删除</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>总价 {{totalPrice()}}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <script type="module">
+        import { createApp, reactive, watch } from './vue.esm-browser.js'
+
+        createApp({
+            setup(){
+                const data = reactive({
+                    selected: false,  // 表示是否全选
+                    checkboxList: [],
+                    list: [{
+                        id: 1,
+                        name: "铅笔",
+                        price: 10,
+                        number: 1,
+                        stock: 3,
+                    },
+                    {
+                        id: 2,
+                        name: "鼠标",
+                        price: 20,
+                        number: 2,
+                        stock: 5,
+                    },
+                    {
+                        id: 3,
+                        name: "键盘",
+                        price: 30,
+                        number: 1,
+                        stock: 6,
+                    }],
+                })
+
+                const selectAll = () => {
+                    // console.log(data.selected);
+                    if(data.selected){
+                        data.checkboxList = data.list
+                    }else{
+                        data.checkboxList = []
+                    }
+                    console.log(data.checkboxList);
+                }
+
+                // watch(() => data.checkboxList, (newValue, oldValue) => {
+                //     console.log('newValue', newValue, 'oldValue', oldValue)
+                // })
+
+                const checkSelect = () => {
+                    if (data.checkboxList.length == data.list.length && data.list.length != 0){
+                        data.selected = true
+                    }else{
+                        data.selected = false
+                    }
+                } 
+
+                const totalPrice = () => {
+                    let total = 0
+                    for (let i = 0;i < data.checkboxList.length;i++){
+                        total += data.checkboxList[i].price * data.checkboxList[i].number
+                    }
+                    return total
+                }
+
+                const sub = (value) => {
+                    value.number--
+                    if (value.number <= 1){
+                        value.number = 1
+                    }
+                }
+
+                const add = (value) => {
+                    value.number++
+                    if (value.number >= value.stock){
+                        value.number = value.stock
+                    }
+                }
+
+                const del = (index, id) => {
+                    data.list.splice(index, 1)
+
+                    let newArray = data.checkboxList.filter((value, index) => {
+                        return value.id != id
+                    })
+                    data.checkboxList = newArray
+
+                    checkSelect()
+                }
+
+                return {
+                    data,
+                    selectAll,
+                    checkSelect,
+                    totalPrice,
+                    sub,
+                    add,
+                    del,
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>
