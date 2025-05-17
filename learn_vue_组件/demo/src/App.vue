@@ -14,7 +14,12 @@ import Footer from './components/footer.vue'
     <Footer>
         <!-- 具名插槽 -->
         <!-- <template v-slot:url> -->
-        <template #url>
+        <!-- <template #url="data"> -->
+        <!-- 可以使用data形式 -->
+        <template #url="{title, user}">
+        <!-- 也可以使用解构形式 -->
+            {{ title }}
+            {{ user }}
             <a href="www.baidu.com">网址</a>
         </template>
     </Footer>
