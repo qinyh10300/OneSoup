@@ -1,20 +1,18 @@
 <script setup>
-import { reactive, toRefs, toRef } from 'vue'
+import { useWebStore } from './stores/web.js'
 
-let web = reactive({
-    name: "秦一骅",
-    url: "qinyh10300.github.io"
-})
+const webStore = useWebStore()
 
-// let {name, url} = toRefs(web)
+console.log(webStore.web);
+console.log(webStore.users);
 
-let url = toRef(web, "url")
-
-console.log(url);
 </script>
-
+    
 <template>
-    {{ url }}
+    {{webStore.web.url}}
+    {{webStore.users}}
+
+    <button @click="webStore.userAdd">添加用户</button>
 </template>
 
 <style scoped>
